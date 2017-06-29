@@ -1,4 +1,4 @@
-within HumanBehaviour.Utilities.DateUtil;
+within DateUtil;
 function is_gapyear
 
   input Integer year;
