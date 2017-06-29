@@ -1,4 +1,4 @@
-within HumanBehaviour.Utilities.DateUtil;
+within DateUtil;
 function compute_timegap
   "Computes the timegap between two dates in a usergiven unit"
 
@@ -52,11 +52,11 @@ algorithm
     clockL :=L[4:7];
 
     //Daynumber
-    L_nDays := .HumanBehaviour.Utilities.DateUtil.day_of_year(
+    L_nDays := DateUtil.day_of_year(
       L[1],
       L[2],
       L[3]);
-    E_nDays := .HumanBehaviour.Utilities.DateUtil.day_of_year(
+    E_nDays := DateUtil.day_of_year(
       E[1],
       E[2],
       E[3]);
@@ -65,11 +65,11 @@ algorithm
     if L[1] == E[1] then
       nDays :=L_nDays - E_nDays;
     else
-      nDays := .HumanBehaviour.Utilities.DateUtil.days_per_year(E[1]) - E_nDays;
+      nDays := .DateUtil.days_per_year(E[1]) - E_nDays;
       year :=E[1] + 1;
 
       while year<L[1] loop
-        nDays := nDays + .HumanBehaviour.Utilities.DateUtil.days_per_year(year);
+        nDays := nDays + DateUtil.days_per_year(year);
         year :=year + 1;
       end while;
 

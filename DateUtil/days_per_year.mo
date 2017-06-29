@@ -1,10 +1,10 @@
-within HumanBehaviour.Utilities.DateUtil;
+within DateUtil;
 function days_per_year
   input Integer year;
   output Integer ndays;
 
 protected
-  Boolean gapyear=.HumanBehaviour.Utilities.DateUtil.is_gapyear(year);
+  Boolean gapyear= DateUtil.is_leapyear(year);
 
 algorithm
 

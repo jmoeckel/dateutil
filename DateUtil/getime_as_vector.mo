@@ -1,4 +1,4 @@
-within HumanBehaviour.Utilities.DateUtil;
+within DateUtil;
 function getime_as_vector
 
   output Integer[7] M;

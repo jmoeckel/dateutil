@@ -1,4 +1,4 @@
-within HumanBehaviour.Utilities.DateUtil;
+within DateUtil;
 function day_of_year
 
   input Integer Y;
@@ -12,7 +12,7 @@ protected
 
 algorithm
 
-  if .HumanBehaviour.Utilities.DateUtil.is_gapyear(Y) then
+  if DateUtil.is_leapyear(Y) then
     DpM[2] :=DpM[2] + 1;
   end if;
 
