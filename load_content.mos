@@ -1,0 +1,3 @@
+openModel("./DateUtil/package.mo");
+openModel("../Samples/package.mo")
+openModel("../Tests/package.mo");
