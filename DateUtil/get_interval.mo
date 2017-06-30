@@ -1,12 +1,13 @@
 within DateUtil;
-function compute_timegap
-  "Computes the timegap between two dates in a usergiven unit"
+function get_interval "Computes the interval between two dates. Given dates must not be ordered 
+  (i.e. second input might be earlier or later than first). Unit of the interval 
+  is hours by default, but can be adapted."
 
-  input Integer[7] D1 "date 1";
-  input Integer[7] D2 "date 2";
+  input Integer[7] D1 "First date, format: {year, month, day, hour, minute, second, milisecond}";
+  input Integer[7] D2 "Second date, format: {year, month, day, hour, minute, second, milisecond}";
   input String unit = "hr" "Must be in {'d','hr', 'min', 'sec', 'ms'}";
 
-  output Integer diff;
+  output Integer interval "Interval between the dates 'D1' and 'D2' in unit 'unit'.";
 
 protected
   Integer[7] L "Later";
@@ -29,7 +30,7 @@ protected
 algorithm
 
   if Modelica.Math.Vectors.isEqual(D1,D2) then
-    diff :=0;
+    interval :=0;
 
   else
     //Detemine, which date is the later one
@@ -61,15 +62,15 @@ algorithm
       E[2],
       E[3]);
 
-    //Diff in Days
+    //interval in Days
     if L[1] == E[1] then
       nDays :=L_nDays - E_nDays;
     else
-      nDays := .DateUtil.days_per_year(E[1]) - E_nDays;
+      nDays :=.DateUtil.days_in_year(E[1]) - E_nDays;
       year :=E[1] + 1;
 
       while year<L[1] loop
-        nDays := nDays + DateUtil.days_per_year(year);
+        nDays :=nDays + DateUtil.days_in_year(year);
         year :=year + 1;
       end while;
 
@@ -102,18 +103,17 @@ algorithm
 
     //adapt the output
     if unit == "d" then
-      diff :=nDays;
+      interval :=nDays;
     elseif unit == "hr" then
-      diff :=nDays*24 + difftime[1];
+      interval :=nDays*24 + difftime[1];
     elseif unit == "min" then
-      diff :=nDays*1440 + difftime[1]*60 + difftime[2];
+      interval :=nDays*1440 + difftime[1]*60 + difftime[2];
     elseif unit == "sec" then
-      diff :=nDays*86400 + difftime[1]*3600 + difftime[2]*60 + difftime[3];
+      interval :=nDays*86400 + difftime[1]*3600 + difftime[2]*60 + difftime[3];
     else
-      diff :=nDays*86400000 + difftime[1]*3600000 + difftime[2]*60000 +
-        difftime[4];
+      interval :=nDays*86400000 + difftime[1]*3600000 + difftime[2]*60000 + difftime[4];
     end if;
 
   end if;
 
-end compute_timegap;
+end get_interval;
