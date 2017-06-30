@@ -1,9 +1,9 @@
 within DateUtil;
 function is_leapyear "Returns true, if the given year is a leap year, otherwise false. 
-  Considers years after 1582 (gregorian calendar)"
+  Considers years after 1582 (gregorian calendar)."
 
-  input Integer year;
-  output Boolean isLeapYear;
+  input Integer year "Year that should be checked";
+  output Boolean isLeapYear "true, if 'year' is a leap year, otherwise false";
 
 algorithm
 
