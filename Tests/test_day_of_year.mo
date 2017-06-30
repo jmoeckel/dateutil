@@ -1,21 +1,36 @@
-within Tests.DateUtil;
+within Tests;
 function test_day_of_year
 
-protected
-  Integer[4] Ys = {2016, 2017, 1900,2017};
-  Integer[4] Ms = {3,6,4,1};
-  Integer[4] Ds = {1,2,3,1};
+  input String reportname = "";
 
-  Integer[4] Expctd = {61, 153,93, 1};
-  Integer[4] Cmptd;
+protected
+  Integer tc = 5;
+
+  Integer[tc] Ys = {2016, 2017, 1900,2017,2000};
+  Integer[tc] Ms = {3,6,4,1,2};
+  Integer[tc] Ds = {1,2,3,1,29};
+
+  Integer[tc] Expctd = {61, 153,93, 1,60};
+  Integer Cmptd;
+
+  Boolean result = true;
 
 algorithm
-  for i in 1:4 loop
-    Cmptd[i] :=.HumanBehaviour.Utilities.DateUtil.day_of_year(
+
+  for i in 1:tc loop
+    Cmptd := DateUtil.day_of_year(
       Ys[i],
       Ms[i],
       Ds[i]);
-    assert(Cmptd[i]==Expctd[i], "'day_of_year': Wrong output for test " + String(i), AssertionLevel.warning);
+
+    if not Cmptd == Expctd[i] then
+      Modelica.Utilities.Streams.print("  - 'day_of_year()': Wrong output for testcase " + String(i) + ". Should be '" + String(Expctd[i]) + "', but is '" + String(Cmptd) + "'.",reportname);
+      result :=false;
+    end if;
   end for;
+
+  if result then
+    Modelica.Utilities.Streams.print("  - 'day_of_year()': Each testcase passed!",reportname);
+  end if;
 
 end test_day_of_year;
