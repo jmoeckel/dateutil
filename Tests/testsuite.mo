@@ -1,6 +1,6 @@
 within Tests;
 function testsuite
-  "Executing all tests in this package. If parameter report is set to true, a report is generate in form of a textfile"
+  "Executing all tests in this package. If input reportname is given, a report is generate in a corresponding file (otherwise output is streamed to console)."
 
   input String reportname = "";
 
