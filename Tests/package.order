@@ -1,4 +1,5 @@
+testmanager
 test_days_per_year
 test_day_of_year
-test_is_gapyear
+test_is_leapyear
 test_compute_timegap
