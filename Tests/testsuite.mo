@@ -10,10 +10,12 @@ algorithm
 
   test_is_leapyear(reportname);
   test_get_time(reportname);
+  test_day_of_year(reportname);
+  test_days_in_year(reportname);
+  test_get_interval(reportname);
 
 
   //Clean Up
-
   Modelica.Utilities.Files.removeFile("dslog.txt");
   Modelica.Utilities.Files.removeFile("empty.txt");
   Modelica.Utilities.Files.removeFile("status");
