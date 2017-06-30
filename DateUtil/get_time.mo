@@ -1,7 +1,8 @@
 within DateUtil;
-function getime_as_vector
+function get_time
+  "Returns the current timestamp (year to miliseconds) as a vector. Uses Modelica.Utilities.System.getTime()"
 
-  output Integer[7] M;
+  output Integer[7] M "Vector contains the current timestamp: [year, month, day, hour, minute, second, milisecond]";
 
 protected
   Integer ms "Millisecond";
@@ -17,4 +18,4 @@ algorithm
 
   M :={year,mon,day,hour,min,sec,ms};
 
-end getime_as_vector;
+end get_time;
