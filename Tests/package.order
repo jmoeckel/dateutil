@@ -1,5 +1,6 @@
-testmanager
-test_days_per_year
+testsuite
+test_days_in_year
 test_day_of_year
 test_is_leapyear
-test_compute_timegap
+test_get_interval
+test_get_time

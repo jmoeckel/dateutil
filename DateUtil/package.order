@@ -1,5 +1,5 @@
-compute_timegap
-getime_as_vector
+get_interval
+get_time
 is_leapyear
 day_of_year
-days_per_year
+days_in_year
