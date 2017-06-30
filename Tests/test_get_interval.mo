@@ -1,11 +1,10 @@
-within Tests.DateUtil;
-function test_compute_timegap
+within Tests;
+function test_get_interval
+
+ input String reportname = "";
 
 protected
-  Integer[7] D1=.HumanBehaviour.Utilities.DateUtil.getime_as_vector();
-
-  Integer Cmptd1=.HumanBehaviour.Utilities.DateUtil.compute_timegap(D1, D1);
-  Integer Expctd1 = 0;
+  Integer[7] D1 = DateUtil.get_time();
 
   Integer[3,7] Dates = [2017,2,28,0,0,0,0;
                         2017,2,28,0,0,0,5;
@@ -24,20 +23,29 @@ protected
 
   String[5] units = {"d","hr","min","sec","ms"};
 
-algorithm
+  Boolean result = true;
 
-  assert(Cmptd1==Expctd1, "'compute_timegap': Wrong output for Cmptd1", AssertionLevel.warning);
+algorithm
 
   for i in 1:3 loop
     for j in 1:3 loop
       for k in 1:5 loop
-        Cmptd :=.HumanBehaviour.Utilities.DateUtil.compute_timegap(
+        Cmptd :=DateUtil.get_interval(
           Dates[i, :],
           Dates[j, :],
           units[k]);
-        assert(Cmptd==Expctd[(i-1)*3+j,k], "'compute_timegap': Wrong output for test: " + String(i) + "," + String(j) + "," + String(k), AssertionLevel.warning);
+
+        if not Cmptd == Expctd[(i-1)*3+j,k] then
+          Modelica.Utilities.Streams.print("  - 'get_interval()': Wrong output for testcase (" + String(i) + "," + String(j) + "," + String(k) + "). Should be '" + String(Expctd[(i-1)*3+j,k]) + "', but is '" + String(Cmptd) + "'.",reportname);
+          result :=false;
+        end if;
+
       end for;
     end for;
   end for;
 
-end test_compute_timegap;
+  if result then
+    Modelica.Utilities.Streams.print("  - 'get_interval()': Each testcase passed!",reportname);
+  end if;
+
+end test_get_interval;
