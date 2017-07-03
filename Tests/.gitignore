@@ -1,0 +1,7 @@
+*.txt
+
+# Modelica specific files
+*.mat
+*.exe
+status
+request
