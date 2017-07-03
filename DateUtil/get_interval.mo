@@ -5,7 +5,7 @@ function get_interval "Computes the interval between two dates. Given dates must
 
   input Integer[7] D1 "First date, format: {year, month, day, hour, minute, second, milisecond}";
   input Integer[7] D2 "Second date, format: {year, month, day, hour, minute, second, milisecond}";
-  input String unit = "hr" "Must be in {'d','hr', 'min', 'sec', 'ms'}";
+  input String unit = "hr" "Unit of the computed interval. Must be in {'d','hr', 'min', 'sec', 'ms'}";
 
   output Integer interval "Interval between the dates 'D1' and 'D2' in unit 'unit'.";
 
@@ -24,8 +24,6 @@ protected
   Integer nDays;
   Integer year;
   Integer keepOne;
-
-  String s;
 
 algorithm
 
@@ -52,7 +50,7 @@ algorithm
     clockE :=E[4:7];
     clockL :=L[4:7];
 
-    //Daynumber
+    //Day of year
     L_nDays := DateUtil.day_of_year(
       L[1],
       L[2],
@@ -62,7 +60,7 @@ algorithm
       E[2],
       E[3]);
 
-    //interval in Days
+    //interval in days
     if L[1] == E[1] then
       nDays :=L_nDays - E_nDays;
     else
